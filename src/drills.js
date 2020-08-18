@@ -17,3 +17,27 @@ function searchShoppingList(searchTerm) {
 }
 
 searchShoppingList('burger');
+
+function paginateResults (page){
+  const productsPerPage= 6;
+  const offset = productsPerPage * (page - 1);
+  knexInstance
+    .select('name','price','category','date_added')
+    .from('shopping_list')
+    .limit(productsPerPage)
+    .offset(offset)
+    .then(result => {
+      console.log(result);
+    });
+    
+}
+
+paginateResults(1);
+
+
+// function itemsAfterDate (daysAgo){
+//   knexInstance
+//     .select('name','price','category')
+//     .from('shopping_list')
+
+// }
